@@ -45,6 +45,20 @@
   </style>
 
   <script>
+    const container = document.querySelector('.controls')
+
+    container.querySelectorAll('input').forEach(e => e.addEventListener('input', change))
+    function change(){
+    const spacing = document.getElementById('spacing')
+    const blurs = document.getElementById('blur')
+    const color = document.getElementById('base')
+
+    const img = document.querySelector('img')
+
+    img.style.padding = spacing.value + 'px'
+    img.style.background = color.value
+    img.style.filter = `blur(${blurs.value}px)`
+  }
   </script>
 
 </body>

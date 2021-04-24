@@ -47,6 +47,7 @@
         inset 0 0 0 3px #EFEFEF,
         inset 0 0 10px black,
         0 0 10px rgba(0,0,0,0.2);
+      transform: rotate(90deg);
     }
 
     .clock-face {
@@ -62,13 +63,42 @@
       background: black;
       position: absolute;
       top: 50%;
+      transform: translateY(-50%);
+      transform-origin: right bottom;
+      
     }
-
+    .clock-face::after{
+      content: '';
+      position: absolute;
+      display: block;
+      height: 10px;
+      width: 10px;
+      /* background: red; */
+      transform: translate(-50%,-50%);
+      top: 50%;
+      left: 50%;
+    }
+    .second-hand{
+      transform-origin: right top;
+    }
+    .hour-hand{
+      transform-origin: right top;
+    }
   </style>
 
   <script>
-
-
+    setInterval(function(){      
+      const date = new Date()
+      const shortHands = ((date.getHours() > 12 ? date.getHours() - 12 : date.getHours()) * 30) + (date.getMinutes()/60 * 30)
+      const longHands = date.getMinutes() * 6
+      const secHands = date.getSeconds() * 6
+      const hourHand = document.querySelector('.hour-hand')
+      const minHand = document.querySelector('.min-hand')
+      const secHand = document.querySelector('.second-hand')
+      hourHand.style.rotate = shortHands+'deg'
+      minHand.style.rotate = longHands+'deg'
+      secHand.style.rotate = secHands+'deg'
+    },1000)
   </script>
 </body>
 </html>
