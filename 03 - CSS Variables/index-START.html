@@ -42,12 +42,16 @@
     input {
       width: 100px;
     }
+    img{
+      padding: 10px;
+      background: yellow;
+    }
   </style>
 
   <script>
-    const container = document.querySelector('.controls')
+    const container = document.querySelectorAll('.controls input')
 
-    container.querySelectorAll('input').forEach(e => e.addEventListener('input', change))
+    container.forEach(e => e.addEventListener('input', change))
     function change(){
     const spacing = document.getElementById('spacing')
     const blurs = document.getElementById('blur')
