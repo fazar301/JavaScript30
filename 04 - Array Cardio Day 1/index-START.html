@@ -37,29 +37,64 @@
     
     // Array.prototype.filter()
     // 1. Filter the list of inventors for those who were born in the 1500's
-
+    const inventorOld = inventors.filter(e => e.year > 1499 && e.year < 1600)
+    console.table(inventorOld)
     // Array.prototype.map()
     // 2. Give us an array of the inventors first and last names
-
+    const [...name] = inventors.map(e => `${e.first} ${e.last}`)
+    console.log(name)
     // Array.prototype.sort()
     // 3. Sort the inventors by birthdate, oldest to youngest
-
+    const oldInventor = inventors.sort((a,b) => a.year - b.year)
+    console.table(oldInventor)
     // Array.prototype.reduce()
     // 4. How many years did all the inventors live all together?
+    const totalLive = inventors.reduce((a,i) => a + (i.passed - i.year), 0)
+    console.table(totalLive)
 
     // 5. Sort the inventors by years lived
-
+    const manyLive = inventors.sort((a,b) => (b.passed - b.year) - (a.passed - a.year))
+    console.table(manyLive)
     // 6. create a list of Boulevards in Paris that contain 'de' anywhere in the name
     // https://en.wikipedia.org/wiki/Category:Boulevards_in_Paris
 
 
     // 7. sort Exercise
     // Sort the people alphabetically by last name
-
+    const lsName = people.sort((a,b) => {
+      const [aFirst, aLast] = a.split(', ')
+      const [bFirst, bLast] = b.split(', ')
+      
+      if(aLast < bLast){
+        return -1
+      }else if(aLast > bLast){
+        return 1
+      }else{
+        return 0
+      }
+    })
+    console.log(lsName)
     // 8. Reduce Exercise
     // Sum up the instances of each of these
-    const data = ['car', 'car', 'truck', 'truck', 'bike', 'walk', 'car', 'van', 'bike', 'walk', 'car', 'van', 'car', 'truck' ];
+    const data = ['car', 'car', 'truck', 'truck', 'bike', 'walk', 'car', 'van', 'bike', 'walk', 'car', 'van', 'car', 'truck'];
 
+    // const transport = {
+    //   car: data.filter(e => e === 'car').length,
+    //   truck: data.filter(e => e === 'truck').length,
+    //   bike: data.filter(e => e === 'bike').length,
+    //   walk: data.filter(e => e === 'walk').length,
+    //   van: data.filter(e => e === 'van').length,
+    // }
+    // console.log(transport)
+    const transport = data.reduce((a,i) => {
+      if(a[i] === undefined){
+        a[i] = 0
+      }else{
+        a[i]++
+      }
+      return a
+    },{})
+    console.log(transport)
   </script>
 </body>
 </html>

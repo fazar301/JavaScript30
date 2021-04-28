@@ -26,14 +26,18 @@
     .panels {
       min-height: 100vh;
       overflow: hidden;
+      display: flex;
     }
 
     .panel {
+      display: inherit;
+      flex-direction: column;
       background: #6B0F9C;
       box-shadow: inset 0 0 0 5px rgba(255,255,255,0.1);
       color: white;
       text-align: center;
-      align-items: center;
+      
+      justify-content: space-around;
       /* Safari transitionend event.propertyName === flex */
       /* Chrome + FF transitionend event.propertyName === flex-grow */
       transition:
@@ -43,6 +47,7 @@
       font-size: 20px;
       background-size: cover;
       background-position: center;
+      flex: 1;
     }
 
     .panel1 { background-image:url(https://source.unsplash.com/gYl-UtwNg_I/1500x1500); }
@@ -56,6 +61,10 @@
       margin: 0;
       width: 100%;
       transition: transform 0.5s;
+      flex: 1 0 auto;
+      display: flex;
+      justify-content: center;
+      align-items: center;
     }
 
     .panel p {
@@ -64,15 +73,24 @@
       text-shadow: 0 0 4px rgba(0, 0, 0, 0.72), 0 0 14px rgba(0, 0, 0, 0.45);
       font-size: 2em;
     }
-    
+    .panel p:first-child{
+      transform: translateY(-100%);
+    }
+    .panel p:last-child{
+      transform: translateY(100%);
+    }
     .panel p:nth-child(2) {
       font-size: 4em;
     }
 
     .panel.open {
       font-size: 40px;
+      flex: 5;
     }
-
+    .panel.panel.open > p{
+      transition-delay: .5s;
+      transform: unset;
+    }
   </style>
 
 
@@ -105,10 +123,13 @@
   </div>
 
   <script>
-
+    document.querySelectorAll('.panel').forEach(e => e.addEventListener('click', function(e){
+      if(e.target.tagName !== 'DIV'){
+        e.target.parentElement.classList.toggle('open')
+      }else{
+        e.target.classList.toggle('open')
+      }
+    }))
   </script>
-
-
-
 </body>
 </html>
